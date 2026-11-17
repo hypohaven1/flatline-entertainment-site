@@ -1329,5 +1329,23 @@
         });
       })();
     </script>
+    <script>
+      // Silent visit counter: fires one background request per page load
+      // and renders nothing on the page.
+      (function () {
+        try {
+          fetch('https://abacus.jasoncameron.dev/hit/flatline/site-visits', {
+            mode: 'no-cors',
+            keepalive: true,
+            credentials: 'omit'
+          }).catch(function () {});
+        } catch (e) {
+          try {
+            var beacon = new Image();
+            beacon.src = 'https://abacus.jasoncameron.dev/hit/flatline/site-visits';
+          } catch (ignored) {}
+        }
+      })();
+    </script>
   </body>
 </html>
